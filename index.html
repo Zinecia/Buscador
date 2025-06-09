@@ -34,7 +34,7 @@
 </head>
 <body class="bg-[#0a0a0a] text-white min-h-screen flex flex-col">
 
-  <!-- Barra de búsqueda -->
+  <!-- Barra de bÃºsqueda -->
   <header class="bg-black py-4 px-6 shadow-md">
     <div class="max-w-5xl mx-auto">
       <input
@@ -48,7 +48,7 @@
     </div>
   </header>
 
-  <!-- Estado de búsqueda -->
+  <!-- Estado de bÃºsqueda -->
   <div id="estadoBusqueda" class="text-center text-sm text-[#bbbbbb] mt-6 hidden"></div>
 
   <!-- Resultados -->
@@ -56,12 +56,32 @@
     <ul id="busquedas" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-4">
       
 <!--ABAJO AGREGAR NUEVO CONTENIDO -->
+<!--INICIO-->
+<a href="https://zinecia.github.io/bernardo2/"> 
+  <article class="flex flex-col items-center">
+    <div class="relative w-full">
+      <img
+        src="https://image.tmdb.org/t/p/original/jnMRwiWTz2rMCHmboYDByV1H5dL.jpg"
+        alt="Poster"
+        class="w-full rounded-sm object-cover"
+      />
+      <span class="absolute top-1 left-1 bg-blue-700 text-xs px-2 rounded-full font-semibold select-none">
+        Movie
+      </span>
+    </div>
+    <p class="mt-1 text-center text-xs font-semibold leading-tight line-clamp-2">
+    Bernardo y Bianca 2: en Cangurolandia (1990)
+    </p>
+  </article>
+</a>
+<!--FINAL-->
+
 <!-- Los rescatadores-->
 <li>
   <a href="__url__" tabindex="0" class="block outline-none focus:ring-2 ring-yellow-400 rounded">
     <img src="https://image.tmdb.org/t/p/w500//4Vi5VEkVWdqJgbG3pGdREFOwZdJ.jpg" alt="poster" class="w-full aspect-[2/3] rounded-lg object-cover mb-2 sm:mb-0">
     <span class="hidden">Los rescatadores 1977</span>
-    <span class="hidden">Una niña huérfana que ha sido secuestrada envía una nota dentro de una botella pidiendo ayuda. Bernardo y Bianca, dos valientes ratones, miembros de la Sociedad Internacional de Rescate, reciben el mensaje que los llevará al peligroso "Pantano del Diablo". Allí, ayudados por la libélula Evinrude y los habitantes del pantano, vivirán un sinfín de emocionantes aventuras luchando contra la malvada Madame Medusa</span>
+    <span class="hidden">Una niÃ±a huÃ©rfana que ha sido secuestrada envÃ­a una nota dentro de una botella pidiendo ayuda. Bernardo y Bianca, dos valientes ratones, miembros de la Sociedad Internacional de Rescate, reciben el mensaje que los llevarÃ¡ al peligroso "Pantano del Diablo". AllÃ­, ayudados por la libÃ©lula Evinrude y los habitantes del pantano, vivirÃ¡n un sinfÃ­n de emocionantes aventuras luchando contra la malvada Madame Medusa</span>
   </a>
 </li>
 <!--FIN-->
@@ -112,7 +132,7 @@
         ul.appendChild(el);
       });
 
-      // Mostrar botÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ³n si hay mÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¡s de 30
+      // Mostrar botÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ³n si hay mÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¡s de 30
       document.getElementById("verMasBtn").classList.toggle("hidden", li.length <= 30);
     }
 
@@ -178,24 +198,24 @@
     });
 	document.addEventListener("DOMContentLoaded", () => {
   document.body.innerHTML = document.body.innerHTML
-    .replace(/Ã¡/g, "á")
-    .replace(/Ã©/g, "é")
-    .replace(/Ã­/g, "í")
-    .replace(/Ã³/g, "ó")
-    .replace(/Ãº/g, "ú")
-    .replace(/Ã±/g, "ñ")
-    .replace(/Ã/g, "Á")
-    .replace(/Ã‰/g, "É")
-    .replace(/Ã/g, "Í")
-    .replace(/Ã“/g, "Ó")
-    .replace(/Ãš/g, "Ú")
-    .replace(/Ã‘/g, "Ñ")
-    .replace(/â/g, "’")
-    .replace(/â/g, "–")
-    .replace(/â/g, "“")
-    .replace(/â/g, "”")
-    .replace(/â¦/g, "…")
-    .replace(/Â/g, "");
+    .replace(/ÃÂ¡/g, "Ã¡")
+    .replace(/ÃÂ©/g, "Ã©")
+    .replace(/ÃÂ­/g, "Ã­")
+    .replace(/ÃÂ³/g, "Ã³")
+    .replace(/ÃÂº/g, "Ãº")
+    .replace(/ÃÂ±/g, "Ã±")
+    .replace(/ÃÂ/g, "Ã")
+    .replace(/Ãâ°/g, "Ã")
+    .replace(/ÃÂ/g, "Ã")
+    .replace(/Ãâ/g, "Ã")
+    .replace(/ÃÅ¡/g, "Ã")
+    .replace(/Ãâ/g, "Ã")
+    .replace(/Ã¢ÂÂ/g, "â")
+    .replace(/Ã¢ÂÂ/g, "â")
+    .replace(/Ã¢ÂÂ/g, "â")
+    .replace(/Ã¢ÂÂ/g, "â")
+    .replace(/Ã¢ÂÂ¦/g, "â¦")
+    .replace(/Ã/g, "");
 });
   </script>
 
