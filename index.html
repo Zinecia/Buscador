@@ -39,7 +39,7 @@
       <input
         id="buscar"
         type="text"
-        placeholder="Â¿QuÃ© vamos a buscar ahora?"
+        placeholder="Que vamos a buscar ahora?"
         class="w-full bg-[#1a1a1a] text-white placeholder-[#bfbfbf] rounded-md px-4 py-3 text-base focus:outline-none"
         oninput="filtrar()"
         autofocus
@@ -128,7 +128,7 @@
   <footer class="bg-[#121212] text-[#999999] text-center py-6 text-sm">
     <div class="mb-2 space-x-4">
       <a href="#" class="hover:text-white">Privacidad</a>
-      <a href="#" class="hover:text-white">TÃ©rminos de Uso</a>
+      <a href="#" class="hover:text-white">Terminos de Uso</a>
       <a href="#" class="hover:text-white">DMCA</a>
     </div>
     <div>2025. Todos los derechos reservados. <strong>LzPlay!</strong> se usa bajo licencia.</div>
@@ -228,6 +228,23 @@
     }, 200);
     ordenarYLimitar();
   });
+  
+  function corregirTexto(texto) {
+  return texto
+    .replace(/Ã¡/g, "á")
+    .replace(/Ã©/g, "é")
+    .replace(/Ã­/g, "í")
+    .replace(/Ã³/g, "ó")
+    .replace(/Ãº/g, "ú")
+    .replace(/Ã±/g, "ñ")
+    .replace(/Ã/g, "Á")
+    .replace(/Ã‰/g, "É")
+    .replace(/Ã/g, "Í")
+    .replace(/Ã“/g, "Ó")
+    .replace(/Ãš/g, "Ú")
+    .replace(/Ã‘/g, "Ñ");
+}
+
 </script>
 
 
