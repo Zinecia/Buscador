@@ -38,7 +38,7 @@
       <input
         id="buscar"
         type="text"
-        placeholder="Â¿QuÃ© vamos a buscar ahora?"
+        placeholder="ÃÂ¿QuÃÂ© vamos a buscar ahora?"
         class="w-full bg-[#1a1a1a] text-white placeholder-[#bfbfbf] rounded-md px-4 py-3 text-base focus:outline-none"
         oninput="filtrar()"
         autofocus
@@ -53,12 +53,22 @@
     <ul id="busquedas" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-4">
 
       <!--ABAJO AGREGAR NUEVO CONTENIDO -->
-<!-- WALL·E: Batallón de limpieza -->
+<!-- La novia cadáver -->
+<li>
+  <a href="https://Zinecia.github.io/peli12/index.html" tabindex="0" class="block outline-none focus:ring-2 ring-yellow-400 rounded">
+    <img src="https://image.tmdb.org/t/p/w500/3ALM0VeZjGUryAqWo6pqohzbLDh.jpg" alt="poster" class="w-full aspect-[2/3] rounded-lg object-cover mb-2 sm:mb-0">
+    <span class="hidden">La novia cadáver 2005</span>
+    <span class="hidden">cadaver Ambientada en un pueblecito europeo en el siglo XIX, esta película de animación fotograma a fotograma cuenta la historia de Victor, un joven que es llevado de repente al infierno, donde se casa con una misteriosa Novia Cadáver, mientras que su verdadera novia, Victoria espera en el mundo de los vivos. A pesar de que la tierra de los muertos resulta ser más colorista que su estricta educación victoriana, Victor aprende que no hay nada en este mundo, ni en el siguiente, que pueda separarle de su único y verdadero amor.</span>
+  </a>
+</li>
+<!--FIN-->
+
+<!-- WALLÂ·E: BatallÃ³n de limpieza -->
 <li>
   <a href="https://Zinecia.github.io/peli11/index.html" tabindex="0" class="block outline-none focus:ring-2 ring-yellow-400 rounded">
     <img src="https://image.tmdb.org/t/p/original/6le8RRVbcC1S9erP1ebhew2F2j3.jpg" alt="poster" class="w-full aspect-[2/3] rounded-lg object-cover mb-2 sm:mb-0">
-    <span class="hidden">WALL·E: Batallón de limpieza 2008</span>
-    <span class="hidden"> walle wall e wal e wale En el año 2800, en un planeta Tierra devastado y sin vida, tras cientos de solitarios años haciendo aquello para lo que fue construido -limpiar el planeta de basura- el pequeño robot WALL•E descubre una nueva misión en su vida cuando se encuentra con una moderna y lustrosa robot exploradora llamada EVE. Ambos viajarán a lo largo de la galaxia y vivirán una emocionante e inolvidable aventura.</span>
+    <span class="hidden">WALLÂ·E: BatallÃ³n de limpieza 2008</span>
+    <span class="hidden"> walle wall e wal e wale En el aÃ±o 2800, en un planeta Tierra devastado y sin vida, tras cientos de solitarios aÃ±os haciendo aquello para lo que fue construido -limpiar el planeta de basura- el pequeÃ±o robot WALLâ¢E descubre una nueva misiÃ³n en su vida cuando se encuentra con una moderna y lustrosa robot exploradora llamada EVE. Ambos viajarÃ¡n a lo largo de la galaxia y vivirÃ¡n una emocionante e inolvidable aventura.</span>
   </a>
 </li>
 <!--FIN-->
@@ -70,7 +80,7 @@
   <a href="https://Zinecia.github.io/peli10/index.html" tabindex="0" class="block outline-none focus:ring-2 ring-yellow-400 rounded">
     <img src="https://image.tmdb.org/t/p/w500/A2EHkY8XcRahcl8S0yaNW2YiM3N.jpg" alt="poster" class="w-full aspect-[2/3] rounded-lg object-cover mb-2 sm:mb-0">
     <span class="hidden">Batman: Gotham a Luz de Gas 2018</span>
-    <span class="hidden">gotica ghotan gotan la del gaz Ciudad gotam  Gotica experimenta una era dorada de descubrimiento e industria, tal como exhibiÃ³ la prÃ³spera Feria Mundial del empresario Bruce Wayne. Pero abajo, en los callejones mÃ¡s oscuros, hay un asesino suelto.</span>
+    <span class="hidden">gotica ghotan gotan la del gaz Ciudad gotam  Gotica experimenta una era dorada de descubrimiento e industria, tal como exhibiÃÂ³ la prÃÂ³spera Feria Mundial del empresario Bruce Wayne. Pero abajo, en los callejones mÃÂ¡s oscuros, hay un asesino suelto.</span>
   </a>
 </li>
 <!--FIN-->
@@ -344,7 +354,7 @@
   function limpiarTextoRoto(texto) {
     try {
       let limpio = decodeURIComponent(escape(texto));
-      limpio = limpio.replace(/[^a-zA-Z0-9Ã¡Ã©Ã­Ã³ÃºÃ¼Ã±ÃÃÃÃÃÃÃÂ¡!Â¿?.,:;()\[\]{}<>Â«Â»"'Â°\-\s]/g, "");
+      limpio = limpio.replace(/[^a-zA-Z0-9ÃÂ¡ÃÂ©ÃÂ­ÃÂ³ÃÂºÃÂ¼ÃÂ±ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¡!ÃÂ¿?.,:;()\[\]{}<>ÃÂ«ÃÂ»"'ÃÂ°\-\s]/g, "");
       return limpio;
     } catch (e) {
       return texto;
@@ -418,8 +428,8 @@
   if (input.length > 1) {
     estado.classList.remove("hidden");
     estado.innerText = encontrados > 0
-      ? `ð Resultados encontrados: ${encontrados}`
-      : `â No se encontraron resultados.`;
+      ? `Ã°ÂÂÂ Resultados encontrados: ${encontrados}`
+      : `Ã¢ÂÂ No se encontraron resultados.`;
   } else {
     estado.classList.add("hidden");
   }
