@@ -371,7 +371,7 @@
   function limpiarTextoRoto(texto) {
     try {
       let limpio = decodeURIComponent(escape(texto));
-      limpio = limpio.replace(/[^a-zA-Z0-9ÃÂÃÂÃÂÃÂ¡ÃÂÃÂÃÂÃÂ©ÃÂÃÂÃÂÃÂ­ÃÂÃÂÃÂÃÂ³ÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂ¼ÃÂÃÂÃÂÃÂ±ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¡!ÃÂÃÂÃÂÃÂ¿?.,:;()\[\]{}<>ÃÂÃÂÃÂÃÂ«ÃÂÃÂÃÂÃÂ»"'ÃÂÃÂÃÂÃÂ°\-\s]/g, "");
+      limpio = limpio.replace(/[^a-zA-¡!¿?.,:;()\[\]{}<>»"'°\-\s]/g, "");
       return limpio;
     } catch (e) {
       return texto;
@@ -445,8 +445,8 @@
   if (input.length > 1) {
     estado.classList.remove("hidden");
     estado.innerText = encontrados > 0
-      ? `ÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂ Resultados encontrados: ${encontrados}`
-      : `ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ No se encontraron resultados.`;
+      ? ` Resultados encontrados: ${encontrados}`
+      : ` No se encontraron resultados.`;
   } else {
     estado.classList.add("hidden");
   }
