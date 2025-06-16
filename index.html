@@ -32,7 +32,43 @@
   </style>
 </head>
 <body class="bg-[#0a0a0a] text-white min-h-screen flex flex-col">
+<script>
+  window.addEventListener("DOMContentLoaded", () => {
+    const userAgent = navigator.userAgent;
+    const token = sessionStorage.getItem("lz_token");
 
+    const esAndroid = /Android/i.test(userAgent);
+    const esIOS = /iPhone|iPad|iPod/i.test(userAgent);
+    const esAppOriginal = /Vinebre/i.test(userAgent);
+    const esPC = !esAndroid && !esIOS;
+
+    if (esAndroid && !esAppOriginal) {
+      alert("Esta versión no es oficial. Por favor descarga la app oficial para acceder.");
+      window.location.href = "https://lzrdrgz01.github.io/download-LzPlay/";
+      return;
+    }
+
+    if (esAndroid && esAppOriginal && token !== "acceso_valido") {
+      alert("Acceso no autorizado. Inicia sesión desde la app.");
+      window.location.href = "https://lzrdrgz01.github.io/download-LzPlay/";
+      return;
+    }
+
+    if (esPC && token !== "clave_pc_valida") {
+      const clave = prompt("Ingresa la contraseña para acceder:");
+      if (clave === "TuClaveSegura") {
+        sessionStorage.setItem("lz_token", "clave_pc_valida");
+        alert("Acceso concedido desde PC.");
+      } else {
+        alert("Contraseña incorrecta.");
+        window.location.href = "https://lzrdrgz01.github.io/download-LzPlay/";
+        return;
+      }
+    }
+
+    // iPhone puede entrar directamente sin token
+  });
+</script>
   <header class="bg-black py-4 px-6 shadow-md">
     <div class="max-w-5xl mx-auto">
       <input
