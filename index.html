@@ -69,18 +69,33 @@
     // iPhone puede entrar directamente sin token
   });
 </script>
-  <header class="bg-black py-4 px-6 shadow-md">
-    <div class="max-w-5xl mx-auto">
-      <input
-        id="buscar"
-        type="text"
-        placeholder="Que vamos a buscar ahora?"
-        class="w-full bg-[#1a1a1a] text-white placeholder-[#bfbfbf] rounded-md px-4 py-3 text-base focus:outline-none"
-        oninput="filtrar()"
-        autofocus
-      />
-    </div>
-  </header>
+<header class="bg-black py-4 px-6 shadow-md">
+  <div class="max-w-5xl mx-auto flex items-center justify-between gap-4">
+    
+    <!-- Campo de búsqueda -->
+    <input
+      id="buscar"
+      type="text"
+      placeholder="¿Qué vamos a buscar ahora?"
+      class="w-full bg-[#1a1a1a] text-white placeholder-[#bfbfbf] rounded-md px-4 py-3 text-base focus:outline-none"
+      oninput="filtrar()"
+      autofocus
+    />
+
+ 
+   <button
+  id="btnRegresar"
+  class="flex items-center text-white text-lg hover:text-yellow-400 transition ml-6"
+  title="Regresar"
+  type="button"
+>
+  <i class="fas fa-arrow-left text-2xl mr-3"></i>
+  Regresar
+</button>
+
+
+  </div>
+</header>
 
   <div id="estadoBusqueda" class="text-center text-sm text-[#bbbbbb] mt-6 hidden"></div>
 
@@ -89,7 +104,7 @@
     <ul id="busquedas" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-4">
 
       <!--ABAJO AGREGAR NUEVO CONTENIDO -->
-	    <!-- El espanta tiburones -->
+		    <!-- El espanta tiburones -->
 <li>
   <a href="https://Zinecia.github.io/contenido24/index.html" tabindex="0" class="block outline-none focus:ring-2 ring-yellow-400 rounded">
     <img src="https://image.tmdb.org/t/p/w500/3vI17Q3mfkIEpvwItomxMy5w1gw.jpg" alt="poster" class="w-full aspect-[2/3] rounded-lg object-cover mb-2 sm:mb-0">
@@ -1540,12 +1555,15 @@
 
 
 
+
+
     </ul>
 
     <div class="text-center mt-6">
-      <button id="verMasBtn" onclick="mostrarTodo()" class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded hidden">
-        Ver mas...
-      </button>
+<button id="verMasBtn" onclick="mostrarMas()" class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded hidden">
+  Ver más...
+</button>
+
     </div>
   </main>
 
@@ -1561,79 +1579,75 @@
 
   <!-- Script de filtrado y funciones -->
  <script>
-  let mostrandoTodo = false;
+  let itemsPorCarga = 30;
+  let elementosMostrados = 0;
+
+  function normalizarTexto(texto) {
+    return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+  }
 
   function ordenarYLimitar() {
     const ul = document.getElementById("busquedas");
     const li = Array.from(ul.querySelectorAll("li"));
+    elementosMostrados = 0;
 
-    li.forEach(el => ul.removeChild(el));
+    li.forEach(el => el.style.display = "none");
 
-    const visibles = li.slice(0, 30);
-    visibles.forEach(el => {
-      el.style.display = "";
-      ul.appendChild(el);
-    });
+    for (let i = 0; i < itemsPorCarga && i < li.length; i++) {
+      li[i].style.display = "";
+      elementosMostrados++;
+    }
 
-    const ocultos = li.slice(30);
-    ocultos.forEach(el => {
-      el.style.display = "none";
-      ul.appendChild(el);
-    });
-
-    document.getElementById("verMasBtn").classList.toggle("hidden", li.length <= 30);
+    document.getElementById("verMasBtn").classList.toggle("hidden", elementosMostrados >= li.length);
   }
 
-  function mostrarTodo() {
+  function mostrarMas() {
     const ul = document.getElementById("busquedas");
-    const li = ul.querySelectorAll("li");
-    li.forEach(el => el.style.display = "");
-    document.getElementById("verMasBtn").classList.add("hidden");
-    mostrandoTodo = true;
+    const li = Array.from(ul.querySelectorAll("li"));
+    let nuevosMostrados = 0;
+
+    for (let i = elementosMostrados; i < li.length && nuevosMostrados < itemsPorCarga; i++) {
+      li[i].style.display = "";
+      nuevosMostrados++;
+      elementosMostrados++;
+    }
+
+    if (elementosMostrados >= li.length) {
+      document.getElementById("verMasBtn").classList.add("hidden");
+    }
   }
 
   function filtrar() {
-    const input = document.getElementById("buscar");
-    const filter = normalizarTexto(input.value.trim().toUpperCase());
+    const input = document.getElementById("buscar").value.trim();
+    const filtro = normalizarTexto(input);
     const ul = document.getElementById("busquedas");
-    const li = ul.getElementsByTagName("li");
+    const li = Array.from(ul.querySelectorAll("li"));
     const estado = document.getElementById("estadoBusqueda");
 
     estado.classList.remove("hidden");
     estado.innerHTML = `Buscando<span class="dot-1"></span><span class="dot-2"></span><span class="dot-3"></span>`;
 
     setTimeout(() => {
-      let hayCoincidencias = false;
+      let encontrados = 0;
 
-      for (let i = 0; i < li.length; i++) {
-        const a = li[i].getElementsByTagName("a")[0];
-        const txtValue = a.textContent || a.innerText;
-        const normalizado = normalizarTexto(txtValue.toUpperCase());
+      li.forEach(el => {
+        const texto = normalizarTexto(el.textContent || "");
+        const coincide = texto.includes(filtro);
+        el.style.display = coincide ? "" : "none";
+        if (coincide) encontrados++;
+      });
 
-        if (filter && normalizado.includes(filter)) {
-          li[i].style.display = "";
-          li[i].classList.add("fade-in");
-          hayCoincidencias = true;
-        } else if (filter) {
-          li[i].style.display = "none";
-          li[i].classList.remove("fade-in");
-        } else {
-          li[i].style.display = mostrandoTodo ? "" : "none";
-        }
-      }
-
-      if (filter === "") {
-        estado.classList.add("hidden");
-        mostrandoTodo = false;
-        ordenarYLimitar();
-      } else if (!hayCoincidencias) {
-        estado.innerHTML = `No se encontraron resultados`;
+      if (filtro.length > 0) {
+        estado.classList.remove("hidden");
+        estado.innerHTML = encontrados > 0
+          ? `Resultados encontrados: ${encontrados}`
+          : `No se encontraron resultados.`;
+        document.getElementById("verMasBtn").classList.add("hidden");
       } else {
         estado.classList.add("hidden");
+        ordenarYLimitar();
       }
-
-      ul.style.display = hayCoincidencias || filter === "" ? "grid" : "none";
-    }, 500);
+    }, 300);
   }
 
   window.addEventListener("load", () => {
@@ -1642,93 +1656,22 @@
       const input = document.getElementById("buscar");
       input.focus();
       input.setSelectionRange(input.value.length, input.value.length);
-	    
     }, 200);
     ordenarYLimitar();
   });
- 
-  function limpiarTextoRoto(texto) {
-    try {
-      let limpio = decodeURIComponent(escape(texto));
-      return limpio;
-    } catch (e) {
-      return texto;
+  
+  document.getElementById('btnRegresar').addEventListener('click', () => {
+    // Suponiendo que en localStorage tienes guardada la URL anterior en 'paginaAnterior'
+    const paginaAnterior = localStorage.getItem('paginaAnterior');
+    if (paginaAnterior) {
+      window.location.href = paginaAnterior;
+    } else {
+      // Si no hay valor guardado, vuelve a la página principal por defecto
+      window.history.back();
     }
-  }
-
-  function limpiarNodo(node) {
-    if (node.nodeType === 3) { // Nodo de texto
-      node.textContent = limpiarTextoRoto(node.textContent);
-    }
-    if (node.nodeType === 1) { // Nodo elemento
-      const atributos = ["alt", "title", "placeholder", "aria-label"];
-      atributos.forEach(attr => {
-        if (node.hasAttribute(attr)) {
-          node.setAttribute(attr, limpiarTextoRoto(node.getAttribute(attr)));
-        }
-      });
-    }
-    node.childNodes.forEach(hijo => limpiarNodo(hijo));
-  }
-
-  document.addEventListener("DOMContentLoaded", function () {
-    limpiarNodo(document.body);
-
-    const observer = new MutationObserver(mutations => {
-      mutations.forEach(mutation => {
-        mutation.addedNodes.forEach(nodo => {
-          limpiarNodo(nodo);
-        });
-      });
-    });
-
-    observer.observe(document.body, {
-      childList: true,
-      subtree: true,
-      characterData: true
-    });
   });
   
   
-    document.getElementById('search').addEventListener('input', function () {
-    const searchTerm = this.value.toLowerCase();
-    const items = document.querySelectorAll('li');
-
-    items.forEach(item => {
-      const span = item.querySelector('span');
-      if (span) {
-        const text = span.textContent.toLowerCase();
-        if (text.includes(searchTerm)) {
-          item.style.display = '';
-        } else {
-          item.style.display = 'none';
-        }
-      }
-    });
-  });
-  
-  function filtrar() {
-  const input = document.getElementById("buscar").value.toLowerCase();
-  const elementos = document.querySelectorAll("#busquedas li");
-  let encontrados = 0;
-
-  elementos.forEach(el => {
-    const texto = el.textContent.toLowerCase();
-    const coincide = texto.includes(input);
-    el.classList.toggle("hidden", !coincide);
-    if (coincide) encontrados++;
-  });
-
-  const estado = document.getElementById("estadoBusqueda");
-  if (input.length > 1) {
-    estado.classList.remove("hidden");
-    estado.innerText = encontrados > 0
-      ? ` Resultados encontrados: ${encontrados}`
-      : ` No se encontraron resultados.`;
-  } else {
-    estado.classList.add("hidden");
-  }
-}
 </script>
 
 
