@@ -141,6 +141,7 @@
   </a>
 </li>
 <!--FIN-->
+	
 	    <li>
   <a href="https://lzwebvideo.github.io/contenido379/index.html" tabindex="0" class="block outline-none focus:ring-2 ring-yellow-400 rounded">
     <img src="https://image.tmdb.org/t/p/w500/jExWD6GuvfSgOMMG49CF9Z5C6ZN.jpg" alt="poster" class="w-full aspect-[2/3] rounded-lg object-cover mb-2 sm:mb-0">
@@ -402,7 +403,8 @@
   </a>
 </li>
 <!--FIN-->
-	    <!-- Whiplash: Musica y Obsesion -->
+
+    <!-- Whiplash: Musica y Obsesion -->
 <li>
   <a href="https://lzwebvideo.github.io/contenido349/index.html" tabindex="0" class="block outline-none focus:ring-2 ring-yellow-400 rounded">
     <img src="https://image.tmdb.org/t/p/w500/uy36CPy5ARuC8qrH8Esg2ndFyJ5.jpg" alt="poster" class="w-full aspect-[2/3] rounded-lg object-cover mb-2 sm:mb-0">
@@ -4583,8 +4585,6 @@ Pero la pelicula tiene un punto mas grande e inquietante. Por lo general, cuando
 
 
 
-
-
     </ul>
 
     <div class="text-center mt-6">
@@ -4605,8 +4605,7 @@ Pero la pelicula tiene un punto mas grande e inquietante. Por lo general, cuando
     <div>2025. Todos los derechos reservados. <strong>LzPlay!</strong> se usa bajo licencia.</div>
   </footer>
 
-  <!-- Script de filtrado y funciones -->
- <script>
+<script>
   let itemsPorCarga = 30;
   let elementosMostrados = 0;
 
@@ -4647,7 +4646,7 @@ Pero la pelicula tiene un punto mas grande e inquietante. Por lo general, cuando
 
   function filtrar() {
     const input = document.getElementById("buscar").value.trim();
-    const filtro = normalizarTexto(input);
+    const palabrasFiltro = normalizarTexto(input).split(/\s+/).filter(Boolean);
     const ul = document.getElementById("busquedas");
     const li = Array.from(ul.querySelectorAll("li"));
     const estado = document.getElementById("estadoBusqueda");
@@ -4660,12 +4659,12 @@ Pero la pelicula tiene un punto mas grande e inquietante. Por lo general, cuando
 
       li.forEach(el => {
         const texto = normalizarTexto(el.textContent || "");
-        const coincide = texto.includes(filtro);
+        const coincide = palabrasFiltro.every(palabra => texto.includes(palabra));
         el.style.display = coincide ? "" : "none";
         if (coincide) encontrados++;
       });
 
-      if (filtro.length > 0) {
+      if (palabrasFiltro.length > 0) {
         estado.classList.remove("hidden");
         estado.innerHTML = encontrados > 0
           ? `Resultados encontrados: ${encontrados}`
@@ -4698,9 +4697,8 @@ Pero la pelicula tiene un punto mas grande e inquietante. Por lo general, cuando
       window.history.back();
     }
   });
-  
-  
 </script>
+
 
 
 </body>
